@@ -1,5 +1,5 @@
 /*
- * Objective : Configure Timer module in PWM mode and drive on-board LEDs with it
+ * Objective : Configure Timer module in PWM mode and drive on-board LED with it
  */
 
 /******************* INCLUDES **********************/
