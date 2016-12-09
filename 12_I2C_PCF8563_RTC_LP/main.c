@@ -37,7 +37,12 @@ int main(void) {
 	unsigned char second;
 	unsigned char second_old;
 	unsigned char minute;
-	unsigned char month;
+	unsigned char minute_old;
+	unsigned char hour;
+	unsigned char hour_old;
+	unsigned char day;
+	unsigned char day_old;
+
 	unsigned char ulDataRx[7];
 	char* weekdayname[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 	int ulindex, i=0;
@@ -98,34 +103,13 @@ int main(void) {
 										while(I2CMasterBusy(I2C1_BASE));	//Wait till operation is completed
 										ulDataRx[ulindex] = I2CMasterDataGet(I2C1_BASE);	//Receive the data
 									}
-									day= BcdToDec(((unsigned char)ulDataRx[3]) & 0b01111111);	//Extract day
-									weekday = BcdToDec(((unsigned char)ulDataRx[4]) & 0b01111111);		//Extract weekday
-									month = (unsigned char)ulDataRx[5];		//Extract month & century
-									century = (month & 0x80);		//Extract century
-									month = BcdToDec(month & 0b01111111);	//Extract month
-									year=BcdToDec(((unsigned char)ulDataRx[6]) & 0b01111111);	//Extract year
+
 								}
 							}
 						}
 					}
 				}
 				I2CMasterDisable(I2C1_BASE);	//Disable the I2C Module and print the data:
-				if (century)
-					UARTprintf(" 21");
-				else
-					UARTprintf(" 20");
-				if (year < 10)
-					UARTprintf("0");
-				UARTprintf("%d",year);
-				UARTprintf("-");
-				if (month < 10)
-					UARTprintf("0");
-					UARTprintf("%d",month);
-					UARTprintf("-");
-				if (day < 10)
-					UARTprintf("0");
-					UARTprintf("%d\t",day);
-					UARTprintf("");
 				if (hour < 10)
 					UARTprintf("0");
 					UARTprintf("%d",hour);
